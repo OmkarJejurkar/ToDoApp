@@ -1,7 +1,9 @@
 package com.ToDoApp.services;
 
-import org.springframework.stereotype.Service;
+import com.ToDoApp.model.Task;
+import java.util.List;
 
-@Service
-public class TaskService {
+public interface TaskService {
+    public Task getTaskById(int id);
+    public List<Task> getAllTasks();
 }
