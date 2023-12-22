@@ -33,9 +33,4 @@ public class UserController {
         return new ResponseEntity<>(user,HttpStatus.CREATED);
     }
 
-    @GetMapping("/getAllUsers")
-    public ResponseEntity getAllUsers() {
-        List<User> userList = userServiceImpl.getAllUsers();
-        return new ResponseEntity(userList,HttpStatus.OK);
-    }
 }

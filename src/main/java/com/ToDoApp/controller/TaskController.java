@@ -5,9 +5,7 @@ import com.ToDoApp.services.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -28,5 +26,18 @@ public class TaskController {
     public ResponseEntity getTaskById() {
         List<Task> taskList = taskServiceImpl.getAllTasks();
         return new ResponseEntity(taskList, HttpStatus.OK);
+    }
+
+    @PostMapping("/createTask/{userId}")
+    public ResponseEntity createTask(@RequestBody Task task, @PathVariable int userId) {
+        String savedTaskTitle = taskServiceImpl.createTask(task.getTitle(),userId);
+        System.out.println(task);
+        return new ResponseEntity(savedTaskTitle, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteTask/{id}")
+    public ResponseEntity deleteTask(@PathVariable int id) {
+        taskServiceImpl.deleteTask(id);
+        return new ResponseEntity("task deleted", HttpStatus.OK);
     }
 }
